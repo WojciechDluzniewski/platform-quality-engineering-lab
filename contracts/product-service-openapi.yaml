@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Product Service API
+  version: "1.0.0"
+
+paths:
+  /products/{product_id}:
+    get:
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Existing product
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Product"
+        "404":
+          description: Product not found
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - price
+        - available
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+        available:
+          type: boolean
